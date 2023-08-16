@@ -1,15 +1,13 @@
 class Venda:
-    def __init__(self, data_hora, produtos, cliente):
-        self.__data_hora = data_hora
+    def __init__(self, produtos, cliente):
+        # To Do Implementar para gerar data e hora ao cadastrar a venda
+        self.__data_hora = None
         self.__produtos: list = produtos
         self.__cliente = cliente
         self.__valor_total = self.calcular_valor_total()
 
     def get_data_hora(self):
         return self.__data_hora
-
-    def set_data_hora(self, data_hora):
-        self.__data_hora = data_hora
 
     def get_produtos(self):
         return self.__produtos
@@ -32,7 +30,7 @@ class Venda:
             total += produto.preco
         return total
 
-    data_hora = property(get_data_hora, set_data_hora)
+    data_hora = property(get_data_hora)
     produtos = property(get_produtos, set_produtos)
     cliente = property(get_cliente, set_cliente)
     valor_total = property(get_valor_total)
