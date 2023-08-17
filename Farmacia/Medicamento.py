@@ -44,11 +44,22 @@ class Medicamento:
 
 
 class MedicamentoQuimioterapico(Medicamento):
+    medicamentos = []
     def __init__(
         self, nome, composto, laboratorio, descricao, preco, necessita_receita
     ):
         super().__init__(nome, composto, laboratorio, descricao, preco)
         self.__necessita_receita = necessita_receita
+        self.criar_medicamento(self)
+
+
+    # Solução baseada em: https://cursos.alura.com.br/forum/topico-operacao-sort-e-append-177423   
+    @classmethod
+    def criar_medicamento(cls, medicamento):
+        cls.medicamentos = sorted(
+            cls.medicamentos + [medicamento],
+            key=lambda x: x.nome
+        )
 
     def get_necessita_receita(self):
         return self.__necessita_receita
@@ -57,8 +68,16 @@ class MedicamentoQuimioterapico(Medicamento):
         self.__necessita_receita = necessita_receita
 
     necessita_receita = property(get_necessita_receita, set_necessita_receita)
-
-
 class MedicamentoFitoterapico(Medicamento):
+    medicamentos = []
     def __init__(self, nome, composto, laboratorio, descricao, preco):
         super().__init__(nome, composto, laboratorio, descricao, preco)
+        self.criar_medicamento(self)
+        
+    @classmethod
+    def criar_medicamento(cls, medicamento):
+        cls.medicamentos = sorted(
+            cls.medicamentos + [medicamento],
+            key=lambda x: x.nome
+        )
+
