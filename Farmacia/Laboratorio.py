@@ -1,10 +1,17 @@
 class Laboratorio:
+    laboratorios_cadastrados = []
+
     def __init__(self, nome, endereco, telefone, cidade, estado):
         self.__nome = nome
         self.__endereco = endereco
         self.__telefone = telefone
         self.__cidade = cidade
         self.__estado = estado
+        self.salvar_lab(self)
+    
+    @classmethod
+    def salvar_laboratorio(cls, lab):
+        cls.laboratorios_cadastrados.append(lab)
 
     def get_nome(self):
         return self.__nome
