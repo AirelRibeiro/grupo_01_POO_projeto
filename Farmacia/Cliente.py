@@ -1,8 +1,15 @@
 class Cliente:
+    clientes_cadastrados = []
+
     def __init__(self, cpf, nome, data_nascimento):
         self.__cpf = cpf
         self.__nome = nome
         self.__data_nascimento = data_nascimento
+        self.salvar_cliente(self)
+    
+    @classmethod
+    def salvar_cliente(cls, cliente):
+        cls.clientes_cadastrados.append(cliente)
 
     @staticmethod
     def vilida_cpf(cpf):
