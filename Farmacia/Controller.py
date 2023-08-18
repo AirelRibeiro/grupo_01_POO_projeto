@@ -144,6 +144,37 @@ class Controller:
         if not found:
             print("Nenhum histórico de compras encontrado para este CPF.")
 
+    def __listar_medicamentos(self):
+        """
+        Lista todos os medicamentos em ordem alfabética,
+            com opções de filtro por tipo de medicamento.
+
+        :return: Lista com os  medicamentos encontrados.
+        """
+        print("Opções de listagem:")
+        print("1. Todos os medicamentos")
+        print("2. Somente quimioterápicos")
+        print("3. Somente fitoterápicos")
+        opcao = input("Escolha uma opção: ")
+
+        if opcao == "1":
+            todos_medicamentos = (
+                self.__quimioterapico_classe.medicamentos
+                + self.__fitoterapico_classe.medicamentos
+            )
+            print(
+                sorted(
+                    todos_medicamentos,
+                    key=lambda medicamento: medicamento.nome,
+                )
+            )
+        elif opcao == "2":
+            print(self.__quimioterapico_classe.medicamentos)
+        elif opcao == "3":
+            print(self.__fitoterapico_classe.medicamentos)
+        else:
+            print("Opção inválida.POr favor, tente novamente")
+
     def main(self):
         while True:
             print("\nMenu:\n")
