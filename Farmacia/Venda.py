@@ -1,3 +1,6 @@
+import datetime
+
+
 class Venda:
     """
     Classe que representa uma venda de produtos para um cliente.
@@ -15,8 +18,8 @@ class Venda:
         :param produtos: Lista de produtos da venda (list).
         :param cliente: Cliente associado à venda.
         """
-        # To Do: Implementar para gerar data e hora ao cadastrar a venda
-        self.__data_hora = None
+
+        self.__data_hora = datetime.datetime.now()
         self.__produtos: list = produtos
         self.__cliente = cliente
         self.__valor_total = self.calcular_valor_total()
