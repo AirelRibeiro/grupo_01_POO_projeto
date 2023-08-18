@@ -11,7 +11,7 @@ class Cliente:
 
     clientes_cadastrados = []
 
-    def __init__(self, cpf: str, nome: str, data_nascimento: str):
+    def __init__(self, cpf: str, nome: str, data_nascimento: str) -> None:
         """
         Inicializa uma instância de Cliente.
 
@@ -26,7 +26,7 @@ class Cliente:
         self.salvar_cliente(self)
 
     @classmethod
-    def salvar_cliente(cls, cliente: "Cliente"):
+    def salvar_cliente(cls, cliente: "Cliente") -> None:
         """
         Adiciona um cliente à lista de clientes cadastrados.
 
@@ -35,7 +35,7 @@ class Cliente:
         cls.clientes_cadastrados.append(cliente)
 
     @staticmethod
-    def valida_cpf(cpf: str):
+    def valida_cpf(cpf: str) -> bool:
         """
         Verifica se o CPF a ser cadastrado é válido.
 
@@ -51,7 +51,7 @@ class Cliente:
         """
         return self.__cpf
 
-    def set_cpf(self, cpf: str):
+    def set_cpf(self, cpf: str) -> None:
         """
         Define o CPF do cliente, se o CPF for válido.
 
@@ -68,7 +68,7 @@ class Cliente:
         """
         return self.__nome
 
-    def set_nome(self, nome: str):
+    def set_nome(self, nome: str) -> None:
         """
         Define o nome do cliente.
 
@@ -84,7 +84,7 @@ class Cliente:
         """
         return self.__data_nascimento
 
-    def set_data_nascimento(self, data_nascimento: str):
+    def set_data_nascimento(self, data_nascimento: str) -> None:
         """
         Define a data de nascimento do cliente.
 
