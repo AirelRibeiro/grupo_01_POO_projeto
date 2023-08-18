@@ -108,6 +108,12 @@ class Controller:
 
         print(f"Medicamento {nome} cadastrado com sucesso!")
 
+    def __listar_clientes(self):
+        for cliente in self.__cliente_classe.listar_clientes:
+            print(f"Nome: {cliente.nome};")
+            print(f"CPF: {cliente.cpf};")
+            print(f"Data de Nascimento: {cliente.data_nascimento}")
+
     def __consultar_cliente(self):
         cpf = input("Digite o CPF do cliente para consulta (sem pontuação): ")
         found = False
