@@ -184,6 +184,7 @@ class Controller:
             print("4. Consultar cliente")
             print("5. Consultar histórico de vendas")
             print("6. Consultar idade para desconto")
+            print("7. Listar medicamentos")
             print("0. Sair")
             opcao = input("Escolha uma opção: ")
 
@@ -192,15 +193,16 @@ class Controller:
             elif opcao == "1":
                 self.__cadastrar_cliente()
             elif opcao == "2":
-                self.__cadastrar_medicamento
+                self.__cadastrar_medicamento()
             elif opcao == "3":
                 self.__listar_clientes()
                 pass
             elif opcao == "4":
-                self.__consultar_cliente
+                self.__consultar_cliente()
             elif opcao == "5":
-                self.__consultar_historico_compras
+                self.__consultar_historico_compras()
             elif opcao == "6":
                 # consultar_idade_desconto(lista_clientes)
-                # (Outras opções)
                 pass
+            elif opcao == "7":
+                self.__listar_medicamentos()
