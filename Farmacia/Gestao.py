@@ -80,3 +80,18 @@ class Controller:
 
         print(f"Medicamento {nome} cadastrado com sucesso!")
 
+    def __consultar_cliente(self):
+        cpf = input("Digite o CPF do cliente para consulta (sem pontuação): ")
+        found = False
+        for cliente in self.__cliente_classe.clientes_cadastrados:
+            if cliente.cpf == cpf:
+                print("\nInformações do Cliente:")
+                print(f"Nome: {cliente.nome}")
+                print(f"CPF: {cliente.cpf}")
+                print("Data de Nascimento: ", end="")
+                print({cliente.data_nascimento.strftime("%d-%m-%Y")})
+                found = True
+                break
+            if not found:
+                print(f"O cliente de CPF {cpf} não está cadastrado.")
+
