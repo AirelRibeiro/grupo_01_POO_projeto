@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class Cliente:
     """
     Classe que representa um cliente cadastrado.
@@ -42,6 +45,50 @@ class Cliente:
         :param cpf: CPF a ser validado (str).
         """
         pass  # ToDo: Implementar da validação do CPF
+
+    @staticmethod
+    def valida_data_nascimento(data_nascimento: str) -> bool:
+        """
+        Valida uma data de nascimento no formato 'dd/mm/aaaa'
+        e verifica se o cliente tem mais de 18 anos.
+
+        :param data_nascimento: str.
+        :return: True se a data é válida e o cliente tem mais de 18 anos,
+            False caso contrário.
+        """
+        # Validação de data consultade em: https://shre.ink/valida-data-python
+        try:
+            dia, mes, ano = map(int, data_nascimento.split("/"))
+            if mes < 1 or mes > 12 or ano <= 0:
+                return False
+
+            if mes in (1, 3, 5, 7, 8, 10, 12):
+                ultimo_dia = 31
+            elif mes == 2:
+                if (ano % 4 == 0) and (ano % 100 != 0 or ano % 400 == 0):
+                    ultimo_dia = 29
+                else:
+                    ultimo_dia = 28
+            else:
+                ultimo_dia = 30
+
+            if dia < 1 or dia > ultimo_dia:
+                return False
+
+            data = datetime.strptime(data_nascimento, "%d/%m/%Y")
+            hoje = datetime.today()
+            idade = (
+                hoje.year
+                - data.year
+                - ((hoje.month, hoje.day) < (data.month, data.day))
+            )
+
+            if idade >= 18:
+                return True
+            else:
+                return False
+        except ValueError:
+            return False
 
     def get_cpf(self) -> str:
         """
