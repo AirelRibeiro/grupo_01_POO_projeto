@@ -95,3 +95,18 @@ class Controller:
             if not found:
                 print(f"O cliente de CPF {cpf} não está cadastrado.")
 
+    def __consultar_historico_compras(self):
+        cpf = input("Digite o CPF do cliente para consulta (sem pontuação): ")
+        found = False
+        for venda in self.__venda_classe.vendas:
+            if venda.cliente.cpf == cpf:
+                print("\nCompra realizada em: ", end="")
+                print({venda.data_hora.strftime("%Y-%m-%d %H:%M:%S")})
+                print("\nProdutos:")
+                for produto in venda.produtos:
+                    print(f"{produto['nome']}, Preço: {produto['preco']}")
+                print(f"Valor Total: {venda.valor_total:.2f}")
+                found = True
+        if not found:
+            print("Nenhum histórico de compras encontrado para este CPF.")
+
