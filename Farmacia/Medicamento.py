@@ -3,7 +3,14 @@ class Medicamento:
     Classe que representa um medicamento genérico.
     """
 
-    def __init__(self, nome: str, composto: str, laboratorio: str, descricao: str, preco: float):
+    def __init__(
+        self,
+        nome: str,
+        composto: str,
+        laboratorio: str,
+        descricao: str,
+        preco: float,
+    ):
         """
         Inicializa uma instância de Medicamento.
 
@@ -108,12 +115,16 @@ class Medicamento:
 
 class MedicamentoQuimioterapico(Medicamento):
     """
-    Classe que representa um medicamento quimioterápico, uma subclasse da classe Medicamento.
+    Classe que representa um medicamento quimioterápico,
+        uma subclasse da classe Medicamento.
     """
 
-    medicamentos = []  """ Lista para armazenar os medicamentos quimioterápicos criados """
+    """ Lista para armazenar os medicamentos quimioterápicos criados """
+    medicamentos = []
 
-    def __init__(self, nome, composto, laboratorio, descricao, preco, necessita_receita):
+    def __init__(
+        self, nome, composto, laboratorio, descricao, preco, necessita_receita
+    ):
         """
         Inicializa uma instância de MedicamentoQuimioterapico.
         :param nome: str.
@@ -127,24 +138,28 @@ class MedicamentoQuimioterapico(Medicamento):
         self.__necessita_receita = necessita_receita
         self.__criar_medicamento(self)
 
-
-    # Solução baseada em: https://cursos.alura.com.br/forum/topico-operacao-sort-e-append-177423   
+    # Solução baseada em: https://cursos.alura.com.br/forum/
+    # topico-operacao-sort-e-append-177423
     @classmethod
     def __criar_medicamento(cls, medicamento: "MedicamentoQuimioterapico"):
         """
-        Adiciona um medicamento quimioterápico à lista de medicamentos, ordenada pelo nome.
-        Esse método é chamado no método __init__, cada vez que uma classe é instanciada.
+        Adiciona um medicamento quimioterápico à lista de medicamentos,
+            ordenada pelo nome.
+        Esse método é chamado no método __init__,
+            cada vez que uma classe é instanciada.
 
-        :param medicamento: Instância de MedicamentoQuimioterapico a ser adicionada.
+        :param medicamento: Instância de MedicamentoQuimioterapico
+            a ser adicionada.
         """
         cls.medicamentos = sorted(
-            cls.medicamentos + [medicamento],
-            key=lambda x: x.nome
+            cls.medicamentos + [medicamento], key=lambda x: x.nome
         )
 
     def get_necessita_receita(self):
         """
-        Recupera necessita_receita, o atributo que informa se o medicamento precisa de receita para ser comprado
+        Recupera necessita_receita,
+            o atributo que informa se o medicamento
+            precisa de receita para ser comprado
 
         :return: bool.
         """
@@ -152,7 +167,9 @@ class MedicamentoQuimioterapico(Medicamento):
 
     def set_necessita_receita(self, necessita_receita):
         """
-        Define necessita_receita, o atributo que informa se o medicamento precisa de receita para ser comprado
+        Define necessita_receita,
+            o atributo que informa se o medicamento precisa
+            de receita para ser comprado
 
         :param necessita_receita: bool.
         """
@@ -163,12 +180,21 @@ class MedicamentoQuimioterapico(Medicamento):
 
 class MedicamentoFitoterapico(Medicamento):
     """
-    Classe que representa um medicamento fitoterápico, uma subclasse da classe Medicamento.
+    Classe que representa um medicamento fitoterápico.
+    uma subclasse da classe Medicamento.
     """
 
-    medicamentos = []  """ Lista para armazenar medicamentos criados """
+    """ Lista para armazenar medicamentos criados """
+    medicamentos = []
 
-    def __init__(self, nome: str, composto: str, laboratorio: str, descricao: str, preco: float):
+    def __init__(
+        self,
+        nome: str,
+        composto: str,
+        laboratorio: str,
+        descricao: str,
+        preco: float,
+    ):
         """
         Inicializa uma instância de MedicamentoFitoterapico.
 
@@ -184,13 +210,14 @@ class MedicamentoFitoterapico(Medicamento):
     @classmethod
     def criar_medicamento(cls, medicamento: "MedicamentoFitoterapico"):
         """
-        Adiciona um medicamento fitoterápico à lista de medicamentos, ordenada pelo nome.
-        Esse método é chamado no método __init__, cada vez que uma classe é instanciada.
+        Adiciona um medicamento fitoterápico à lista de medicamentos,
+            ordenada pelo nome.
+        Esse método é chamado no método __init__,
+            cada vez que uma classe é instanciada.
 
-        :param medicamento: Instância de MedicamentoFitoterapico a ser adicionada.
+        :param medicamento: Instância de MedicamentoFitoterapico
+            a ser adicionada.
         """
         cls.medicamentos = sorted(
-            cls.medicamentos + [medicamento],
-            key=lambda x: x.nome
+            cls.medicamentos + [medicamento], key=lambda x: x.nome
         )
-

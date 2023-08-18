@@ -5,7 +5,8 @@ class Cliente:
     Atributos:
         cpf (str): CPF do cliente.
         nome (str): Nome do cliente.
-        data_nascimento (str): Data de nascimento do cliente no formato 'dd/mm/aaaa'.
+        data_nascimento (str): Data de nascimento
+            do cliente no formato 'dd/mm/aaaa'.
     """
 
     clientes_cadastrados = []
@@ -16,13 +17,14 @@ class Cliente:
 
         :param cpf: CPF do cliente (str).
         :param nome: Nome do cliente (str).
-        :param data_nascimento: Data de nascimento do cliente no formato 'dd/mm/aaaa' (str).
+        :param data_nascimento: Data de nascimento do cliente
+            no formato 'dd/mm/aaaa' (str).
         """
         self.__cpf = cpf
         self.__nome = nome
         self.__data_nascimento = data_nascimento
         self.salvar_cliente(self)
-    
+
     @classmethod
     def salvar_cliente(cls, cliente: "Cliente"):
         """
@@ -39,7 +41,7 @@ class Cliente:
 
         :param cpf: CPF a ser validado (str).
         """
-        pass  # Implementação da validação do CPF
+        pass  # ToDo: Implementar da validação do CPF
 
     def get_cpf(self) -> str:
         """
@@ -86,7 +88,8 @@ class Cliente:
         """
         Define a data de nascimento do cliente.
 
-        :param data_nascimento: Nova data de nascimento do cliente no formato 'dd/mm/aaaa' (str).
+        :param data_nascimento: Nova data de nascimento do cliente
+            no formato 'dd/mm/aaaa' (str).
         """
         self.__data_nascimento = data_nascimento
 
