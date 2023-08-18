@@ -44,7 +44,26 @@ class Cliente:
 
         :param cpf: CPF a ser validado (str).
         """
-        pass  # ToDo: Implementar da validação do CPF
+        cpf = cpf.replace(".", "").replace(
+            "-", ""
+        )  # Isso remove os pontos e o hífen
+        if not cpf.isdigit() or len(cpf) != 11:
+            return False
+
+        # Verificando os dígitos
+        total = 0
+        for i in range(9):
+            total += int(cpf[i]) * (10 - i)
+        remainder = total % 11
+        digit1 = 0 if remainder < 2 else 11 - remainder
+
+        total = 0
+        for i in range(10):
+            total += int(cpf[i]) * (11 - i)
+        remainder = total % 11
+        digit2 = 0 if remainder < 2 else 11 - remainder
+
+        return cpf[-2:] == str(digit1) + str(digit2)
 
     @staticmethod
     def valida_data_nascimento(data_nascimento: str) -> bool:
