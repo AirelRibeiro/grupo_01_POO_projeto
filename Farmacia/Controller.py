@@ -175,6 +175,47 @@ class Controller:
         else:
             print("Opção inválida.POr favor, tente novamente")
 
+    def __consultar_medicamento(self):
+        """
+        Busca medicamentos por nome, fabricante ou descrição parcial
+            de acordo com o tipo.
+
+        :return: Lista com os medicamentos encontrados.
+        """
+        tipo = input(
+            "Digite o tipo do medicamento (1 Quimioterápico, 2 Fitoterápico): "
+        )
+
+        while tipo != "1" and tipo != "2":
+            tipo = input(
+                "Digite um tipo válido. 1 Quimioterápico e 2 Fitoterápico: "
+            )
+
+        termo_busca = input("Digite o nome, fabricante ou descrição parcial: ")
+
+        medicamentos_encontrados = []
+
+        if tipo == "1":
+            for medicamento in self.__quimioterapico_classe.medicamentos:
+                if (
+                    termo_busca.lower() in medicamento.nome.lower()
+                    or termo_busca.lower()
+                    in medicamento.laboratorio.nome.lower()
+                    or termo_busca.lower() in medicamento.descricao.lower()
+                ):
+                    medicamentos_encontrados.append(medicamento)
+        else:
+            for medicamento in self.__fitoterapico_classe.medicamentos:
+                if (
+                    termo_busca.lower() in medicamento.nome.lower()
+                    or termo_busca.lower()
+                    in medicamento.laboratorio.nome.lower()
+                    or termo_busca.lower() in medicamento.descricao.lower()
+                ):
+                    medicamentos_encontrados.append(medicamento)
+
+        print(medicamentos_encontrados)
+
     def main(self):
         while True:
             print("\nMenu:\n")
