@@ -110,3 +110,32 @@ class Controller:
         if not found:
             print("Nenhum histórico de compras encontrado para este CPF.")
 
+    def main(self):
+        while True:
+            print("\nMenu:\n")
+            print("1. Cadastrar cliente")
+            print("2. Cadastrar medicamento")
+            print("3. Realizar venda")
+            print("4. Consultar cliente")
+            print("5. Consultar histórico de vendas")
+            print("6. Consultar idade para desconto")
+            print("0. Sair")
+            opcao = input("Escolha uma opção: ")
+
+            if opcao == "0":
+                break
+            elif opcao == "1":
+                self.__cadastrar_cliente()
+            elif opcao == "2":
+                self.__cadastrar_medicamento
+            elif opcao == "3":
+                # Realizar venda
+                pass
+            elif opcao == "4":
+                self.__consultar_cliente
+            elif opcao == "5":
+                self.__consultar_historico_compras
+            elif opcao == "6":
+                # consultar_idade_desconto(lista_clientes)
+                # (Outras opções)
+                pass
