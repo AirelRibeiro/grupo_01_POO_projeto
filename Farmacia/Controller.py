@@ -226,6 +226,7 @@ class Controller:
             print("5. Consultar histórico de vendas")
             print("6. Consultar idade para desconto")
             print("7. Listar medicamentos")
+            print("8. Consultar medicamento")
             print("0. Sair")
             opcao = input("Escolha uma opção: ")
 
@@ -247,3 +248,5 @@ class Controller:
                 pass
             elif opcao == "7":
                 self.__listar_medicamentos()
+            elif opcao == "8":
+                self.__consultar_medicamento()
