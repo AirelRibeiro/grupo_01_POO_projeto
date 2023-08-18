@@ -149,7 +149,7 @@ class Controller:
             print("\nMenu:\n")
             print("1. Cadastrar cliente")
             print("2. Cadastrar medicamento")
-            print("3. Realizar venda")
+            print("3. Listar todos os clientes")
             print("4. Consultar cliente")
             print("5. Consultar histórico de vendas")
             print("6. Consultar idade para desconto")
@@ -163,7 +163,7 @@ class Controller:
             elif opcao == "2":
                 self.__cadastrar_medicamento
             elif opcao == "3":
-                # Realizar venda
+                self.__listar_clientes()
                 pass
             elif opcao == "4":
                 self.__consultar_cliente
