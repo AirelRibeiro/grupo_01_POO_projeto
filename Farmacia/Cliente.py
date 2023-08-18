@@ -26,10 +26,10 @@ class Cliente:
         self.__cpf = cpf
         self.__nome = nome
         self.__data_nascimento = data_nascimento
-        self.salvar_cliente(self)
+        self.__salvar_cliente(self)
 
     @classmethod
-    def salvar_cliente(cls, cliente: "Cliente") -> None:
+    def __salvar_cliente(cls, cliente: "Cliente") -> None:
         """
         Adiciona um cliente à lista de clientes cadastrados.
 
