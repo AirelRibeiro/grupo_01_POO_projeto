@@ -1,7 +1,29 @@
 class Controller:
+    """
+    Classe controladora que gerencia farmácia e interage com usuário
+        para  cadastro de clientes, medicamentos, vendas
+        e operações relacionadas.
+
+    Atributos:
+        cliente (class): Classe Cliente.
+        laboratorio (class): Classe Laboratório.
+        quimioterapico (class): Classe MedicamentoQuimioterapico.
+        fitoterapico (class): Classe MedicamentoFitoterapico.
+        venda (class): Classe Venda.
+    """
+
     def __init__(
         self, cliente, laboratorio, quimioterapico, fitoterapico, venda
     ) -> None:
+        """
+        Inicializa uma instância de Controller.
+
+        :param cliente: Cliente.
+        :param laboratorio: Laboratorio.
+        :param quimioterapico: MedicamentoQuimioterapico.
+        :param fitoterapico: MedicamentoFitoterapico.
+        :param venda: Venda.
+        """
         self.__cliente_classe = cliente
         self.__laboratorio_classe = laboratorio
         self.__quimioterapico_classe = quimioterapico
@@ -9,6 +31,9 @@ class Controller:
         self.__venda_classe = venda
 
     def __cadastrar_cliente(self):
+        """
+        Método privado que realiza o cadastro de um novo cliente.
+        """
         cpf = input("Digite o CPF do cliente (sem pontuação): ")
         if not self.__cliente_classe.validar_cpf(cpf):
             print(
@@ -35,6 +60,9 @@ class Controller:
         print(f"Cliente {cliente.nome} foi cadastrado com sucesso!")
 
     def __cadastrar_medicamento(self):
+        """
+        Método privado que realiza o cadastro de um novo medicamento.
+        """
         nome = input("Digite o nome do medicamento: ")
         principal_composto = input(
             "Digite o principal composto do medicamento: "
