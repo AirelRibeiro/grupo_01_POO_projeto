@@ -11,6 +11,8 @@ class Venda:
         valor_total (float): Valor total da venda.
     """
 
+    vendas = []
+
     def __init__(self, produtos: list, cliente):
         """
         Inicializa uma instância de Venda.
@@ -23,6 +25,16 @@ class Venda:
         self.__produtos: list = produtos
         self.__cliente = cliente
         self.__valor_total = self.calcular_valor_total()
+        self.__salvar_venda(self)
+
+    @classmethod
+    def __salvar_venda(cls, venda: "Venda") -> None:
+        """
+        Adiciona um venda à lista de vendas executadas.
+
+        :param venda: Instância de Venda a ser cadastrada.
+        """
+        cls.vendas.append(venda)
 
     def get_data_hora(self):
         """
