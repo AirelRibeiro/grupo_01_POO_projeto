@@ -37,6 +37,17 @@ class Cliente:
         """
         cls.clientes_cadastrados.append(cliente)
 
+    @classmethod
+    def listar_clientes(cls):
+        """
+        Lista todos os clientes cadastrados em ordem alfabética.
+
+        :return: Lista de instâncias de Cliente em ordem alfabética.
+        """
+        return sorted(
+            cls.clientes_cadastrados, key=lambda cliente: cliente.nome
+        )
+
     @staticmethod
     def valida_cpf(cpf: str) -> bool:
         """
