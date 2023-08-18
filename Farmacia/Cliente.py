@@ -43,6 +43,7 @@ class Cliente:
         Verifica se o CPF a ser cadastrado é válido.
 
         :param cpf: CPF a ser validado (str).
+        :return: True se o CPF for válido e False caso contrário.
         """
         cpf = cpf.replace(".", "").replace(
             "-", ""
