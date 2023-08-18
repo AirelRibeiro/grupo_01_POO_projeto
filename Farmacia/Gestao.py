@@ -33,3 +33,50 @@ class Controller:
 
         cliente = self.__cliente_classe(cpf, nome, f"{dia}/{mes}/{ano}")
         print(f"Cliente {cliente.nome} foi cadastrado com sucesso!")
+
+    def __cadastrar_medicamento(self):
+        nome = input("Digite o nome do medicamento: ")
+        principal_composto = input(
+            "Digite o principal composto do medicamento: "
+        )
+        descricao = input("Digite uma descrição para o medicamento: ")
+
+        for index, lab in enumerate(
+            self.__laboratorio_classe.laboratorios_cadastrados
+        ):
+            print(f"{index + 1}: {lab.nome}")
+        lab_index = int(input("Escolha o laboratório pelo número: "))
+        laboratorio = self.__laboratorio_classe.laboratorios_cadastrados[
+            lab_index - 1
+        ]
+
+        tipo = input(
+            "Digite o tipo do medicamento (1 Quimioterápico, 2 Fitoterápico): "
+        )
+
+        while tipo != "1" and tipo != "2":
+            tipo = input(
+                "Digite um tipo válido. 1  Quimioterápico e  2 Fitoterápico): "
+            )
+
+        if tipo == "1":
+            necessita_receita = input(
+                "O medicamento necessita de receita? (S - sim, N - não): "
+            )
+            necessita_receita = (
+                True if necessita_receita.upper() == "S" else False
+            )
+            self.__quimioterapico_classe(
+                nome,
+                principal_composto,
+                laboratorio,
+                descricao,
+                necessita_receita,
+            )
+        else:
+            self.__fitoterapico_classe(
+                nome, principal_composto, laboratorio, descricao
+            )
+
+        print(f"Medicamento {nome} cadastrado com sucesso!")
+
