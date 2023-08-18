@@ -26,6 +26,15 @@ class Medicamento:
         self.__descricao = descricao
         self.__preco = preco
 
+    def __repr__(self) -> str:
+        return (
+            f"{self.nome}\n"
+            f"Composto: {self.composto}\n"
+            f"Laboratorio: {self.laboratorio}\n"
+            f"Descrição: {self.descricao}\n"
+            f"Preço: {self.preco}"
+        )
+
     def get_nome(self):
         """
         Recupera o nome do medicamento.
@@ -153,6 +162,16 @@ class MedicamentoQuimioterapico(Medicamento):
         """
         cls.medicamentos = sorted(
             cls.medicamentos + [medicamento], key=lambda x: x.nome
+        )
+
+    def __repr__(self) -> str:
+        return (
+            f"\n\n{self.nome}\n"
+            f"Composto: {self.composto}\n"
+            f"Laboratorio: {self.laboratorio}\n"
+            f"Descrição: {self.descricao}\n"
+            f"Preço: {self.preco}"
+            f"Necessita receita? {'Sim' if self.necessita_receita else 'Não'}"
         )
 
     def get_necessita_receita(self):
