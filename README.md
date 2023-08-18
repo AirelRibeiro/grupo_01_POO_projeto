@@ -47,11 +47,9 @@ python3 main.py
 ### O projeto está organizado da seguinte maneira:
 
 - `package Farmacia`
-  - `cliente.py`: Classe que representa os clientes e suas funcionalidades.
-  - `laboratorio.py`: Classe que representa os laboratórios e suas funcionalidades.
-  - `medicamento.py`: Classe base que representa os medicamentos e suas funcionalidades.
-  - `medicamento_quimioterapico.py`: Classe que representa medicamentos quimioterápicos.
-  - `medicamento_fitoterapico.py`: Classe que representa medicamentos fitoterápicos.
-  - `venda.py`: Classe que representa as vendas e suas funcionalidades.
-  - `controller.py`: Classe que controla as ações do sistema, como cadastros e consultas.
+  - `Cliente.py`: Classe que representa os clientes e suas funcionalidades.
+  - `Laboratorio.py`: Classe que representa os laboratórios e suas funcionalidades.
+  - `Medicamento.py`: Classe base que representa os medicamentos e suas funcionalidades, bem como suas subclasses medicamentos quimioterápicos e medicamentos fitoterápicos.
+  - `Venda.py`: Classe que representa as vendas e suas funcionalidades.
+  - `Controller.py`: Classe que controla as ações do sistema, como cadastros e consultas.
 - `main.py`: Arquivo principal do sistema, onde as ações são executadas.
