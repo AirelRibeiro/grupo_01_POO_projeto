@@ -34,26 +34,29 @@ class Controller:
         """
         Método privado que realiza o cadastro de um novo cliente.
         """
-        cpf = input("Digite o CPF do cliente (sem pontuação): ")
-        if not self.__cliente_classe.validar_cpf(cpf):
+        cpf = input("\nDigite o CPF do cliente (sem pontuação): ")
+        if not self.__cliente_classe.valida_cpf(cpf):
             print(
-                "CPF inválido. Por favor, tente novamente com um CPF válido."
+                "\nCPF inválido. Por favor, tente novamente com um CPF válido."
             )
             return
 
-        nome = input("Digite o nome do cliente: ")
+        nome = input("\nDigite o nome do cliente: ")
 
-        ano = input("Digite o ano de nascimento do cliente com dois dígitos")
-
-        mes = input("Digite o mês de nascimento do cliente com dois dígitos")
-        dia = input("Digite o dia de nascimento do cliente com dois dígitos")
+        ano = input(
+            "\nDigite o ano de nascimento do cliente com quatro dígitos: "
+        )
+        mes = input(
+            "\nDigite o mês de nascimento do cliente com dois dígitos: "
+        )
+        dia = input(
+            "\nDigite o dia de nascimento do cliente com dois dígitos: "
+        )
         if not self.__cliente_classe.valida_data_nascimento(
             f"{dia}/{mes}/{ano}"
         ):
-            print(
-                "Data inválida ou cliente com idade insuficiente.",
-                "Por favor verifique os dados e tente novamente.",
-            )
+            print("Data inválida ou cliente com idade insuficiente.", end=" ")
+            print("Por favor verifique os dados e tente novamente.")
             return
 
         cliente = self.__cliente_classe(cpf, nome, f"{dia}/{mes}/{ano}")
@@ -93,27 +96,28 @@ class Controller:
         """
         Método privado que realiza o cadastro de um novo medicamento.
         """
-        nome = input("Digite o nome do medicamento: ")
+        nome = input("\nDigite o nome do medicamento: ")
         principal_composto = input(
             "Digite o principal composto do medicamento: "
         )
+        descricao = input("\nDigite uma descrição para o medicamento: ")
 
         laboratorio = self.__cadastrar_laboratorio()
 
         preco = float(input("\nDigite o preço desse medicamento: "))
 
         tipo = input(
-            "Digite o tipo do medicamento (1 Quimioterápico, 2 Fitoterápico): "
+            "\nDigite tipo de medicamento. 1 Quimioterápico, 2 Fitoterápico: "
         )
 
         while tipo != "1" and tipo != "2":
             tipo = input(
-                "Digite um tipo válido. 1  Quimioterápico e  2 Fitoterápico): "
+                "\nDigite um tipo válido.1 Quimioterápico e 2 Fitoterápico): "
             )
 
         if tipo == "1":
             necessita_receita = input(
-                "O medicamento necessita de receita? (S - sim, N - não): "
+                "\nO medicamento necessita de receita? (S - sim, N - não): "
             )
             necessita_receita = (
                 True if necessita_receita.upper() == "S" else False
@@ -123,38 +127,43 @@ class Controller:
                 principal_composto,
                 laboratorio,
                 descricao,
+                preco,
                 necessita_receita,
             )
         else:
             self.__fitoterapico_classe(
-                nome, principal_composto, laboratorio, descricao
+                nome, principal_composto, laboratorio, descricao, preco
             )
 
-        print(f"Medicamento {nome} cadastrado com sucesso!")
+        print(f"\nMedicamento {nome} cadastrado com sucesso!\n")
 
     def __listar_clientes(self):
-        for cliente in self.__cliente_classe.listar_clientes:
-            print(f"Nome: {cliente.nome};")
+        for cliente in self.__cliente_classe.listar_clientes():
+            print(f"\nNome: {cliente.nome};")
             print(f"CPF: {cliente.cpf};")
             print(f"Data de Nascimento: {cliente.data_nascimento}")
 
     def __consultar_cliente(self):
-        cpf = input("Digite o CPF do cliente para consulta (sem pontuação): ")
+        cpf = input(
+            "\nDigite o CPF do cliente para consulta (sem pontuação): "
+        )
         found = False
         for cliente in self.__cliente_classe.clientes_cadastrados:
             if cliente.cpf == cpf:
-                print("\nInformações do Cliente:")
+                print("\nInformações do Cliente:\n")
                 print(f"Nome: {cliente.nome}")
                 print(f"CPF: {cliente.cpf}")
                 print("Data de Nascimento: ", end="")
-                print({cliente.data_nascimento.strftime("%d-%m-%Y")})
+                print(cliente.data_nascimento)
                 found = True
                 break
             if not found:
-                print(f"O cliente de CPF {cpf} não está cadastrado.")
+                print(f"\nO CPF {cpf} não está cadastrado.")
 
     def __consultar_historico_compras(self):
-        cpf = input("Digite o CPF do cliente para consulta (sem pontuação): ")
+        cpf = input(
+            "\nDigite o CPF do cliente para consulta (sem pontuação): "
+        )
         found = False
         for venda in self.__venda_classe.vendas:
             if venda.cliente.cpf == cpf:
@@ -163,9 +172,11 @@ class Controller:
                 print("\nProdutos:")
                 for produto in venda.produtos:
                     print(f"{produto['nome']}, Preço: {produto['preco']}")
-                print(f"Valor Total: {venda.valor_total:.2f}")
+                print(f"\nValor Total: {venda.valor_total:.2f}")
                 found = True
         if not found:
+            print("\nNenhum histórico de compras encontrado para este CPF.")
+
     def __consultar_idade_desconto(self):
         cpf = input("\nDigite o CPF para consultar desconto (sem pontuação): ")
         found = False
@@ -189,7 +200,7 @@ class Controller:
 
         :return: Lista com os  medicamentos encontrados.
         """
-        print("Opções de listagem:")
+        print("\nOpções de listagem:")
         print("1. Todos os medicamentos")
         print("2. Somente quimioterápicos")
         print("3. Somente fitoterápicos")
@@ -211,7 +222,7 @@ class Controller:
         elif opcao == "3":
             print(self.__fitoterapico_classe.medicamentos)
         else:
-            print("Opção inválida.POr favor, tente novamente")
+            print("\nOpção inválida. Por favor, tente novamente.")
 
     def __consultar_medicamento(self):
         """
@@ -221,7 +232,7 @@ class Controller:
         :return: Lista com os medicamentos encontrados.
         """
         tipo = input(
-            "Digite o tipo do medicamento (1 Quimioterápico, 2 Fitoterápico): "
+            "\nDigite tipo de medicamento. 1 Quimioterápico, 2 Fitoterápico: "
         )
 
         while tipo != "1" and tipo != "2":
