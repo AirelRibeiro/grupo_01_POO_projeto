@@ -258,36 +258,49 @@ class Controller:
         self.__venda_classe.gerar_relatorio_vendas()
 
     def main(self):
+        count = 0
         while True:
             print("\nMenu:\n")
             print("1. Cadastrar cliente")
             print("2. Cadastrar medicamento")
-            print("3. Listar todos os clientes")
-            print("4. Consultar cliente")
-            print("5. Consultar histórico de vendas")
-            print("6. Consultar idade para desconto")
-            print("7. Listar medicamentos")
-            print("8. Consultar medicamento")
+            print("3. Cadastrar laboratório")
+            print("4. Listar todos os clientes")
+            print("5. Consultar cliente")
+            print("6. Consultar histórico de vendas")
+            print("7. Consultar idade para desconto")
+            print("8. Listar medicamentos")
+            print("9. Consultar medicamento")
             print("0. Sair")
             opcao = input("Escolha uma opção: ")
 
             if opcao == "0":
+                self.__gera_relatorio_vendas()
                 break
             elif opcao == "1":
                 self.__cadastrar_cliente()
             elif opcao == "2":
                 self.__cadastrar_medicamento()
             elif opcao == "3":
+                self.__cadastrar_laboratorio()
+            elif opcao == "4":
                 self.__listar_clientes()
                 pass
-            elif opcao == "4":
-                self.__consultar_cliente()
             elif opcao == "5":
-                self.__consultar_historico_compras()
+                self.__consultar_cliente()
             elif opcao == "6":
-                # consultar_idade_desconto(lista_clientes)
-                pass
+                self.__consultar_historico_compras()
             elif opcao == "7":
-                self.__listar_medicamentos()
+                self.__consultar_idade_desconto()
+                pass
             elif opcao == "8":
+                self.__listar_medicamentos()
+            elif opcao == "9":
                 self.__consultar_medicamento()
+            else:
+                count += 1
+                if count < 5:
+                    print("\nVocê precisa selecionar uma opção válida.\n")
+
+                else:
+                    print("\nSistema encerrado. Muitas interações inválidas!")
+                    break
