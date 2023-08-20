@@ -166,7 +166,21 @@ class Controller:
                 print(f"Valor Total: {venda.valor_total:.2f}")
                 found = True
         if not found:
-            print("Nenhum histórico de compras encontrado para este CPF.")
+    def __consultar_idade_desconto(self):
+        cpf = input("\nDigite o CPF para consultar desconto (sem pontuação): ")
+        found = False
+        for cliente in self.__cliente_classe.clientes_cadastrados:
+            if cliente.cpf == cpf:
+                if self.__cliente_classe.valida_se_idoso(
+                    cliente.data_nascimento
+                ):
+                    print("\nCliente tem direito a 15% de desconto.")
+                else:
+                    print("\nCliente não tem direito a desconto.")
+                found = True
+                break
+        if not found:
+            print(f"\nO CPF {cpf} não está cadastrado.")
 
     def __listar_medicamentos(self):
         """
