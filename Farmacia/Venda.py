@@ -95,6 +95,60 @@ class Venda:
             total += produto.preco
         return total
 
+    @classmethod
+    def gerar_relatorio_vendas(cls):
+        """
+        Gera um relatório de vendas contendo as estatísticas solicitadas.
+        """
+        total_vendas = len(cls.vendas)
+        total_receita = sum(venda.obter_valor_total() for venda in cls.vendas)
+
+        produto_mais_vendido = None
+        max_qtd_vendida = 0
+        produto_qtd_vendida = {}
+        for venda in cls.vendas:
+            for produto in venda.obter_produtos():
+                nome_produto = produto.nome
+                if nome_produto in produto_qtd_vendida:
+                    produto_qtd_vendida[nome_produto] += 1
+                else:
+                    produto_qtd_vendida[nome_produto] = 1
+                if produto_qtd_vendida[nome_produto] > max_qtd_vendida:
+                    max_qtd_vendida = produto_qtd_vendida[nome_produto]
+                    produto_mais_vendido = nome_produto
+
+        clientes_unicos = set(
+            venda.obter_cliente().nome for venda in cls.vendas
+        )
+        total_clientes = len(clientes_unicos)
+
+        total_vendas_quimioterapico = sum(
+            1
+            for venda in cls.vendas
+            if any(
+                produto.tipo == "Quimioterapico"
+                for produto in venda.obter_produtos()
+            )
+        )
+        total_vendas_fitoterapico = sum(
+            1
+            for venda in cls.vendas
+            if any(
+                produto.tipo == "Fitoterapico"
+                for produto in venda.obter_produtos()
+            )
+        )
+
+        print("Relatório de Vendas")
+        print(f"Total de Vendas: {total_vendas}")
+        print(f"Total de Receita: R${total_receita:.2f}")
+        print(f"Produto Mais Vendido: {produto_mais_vendido}")
+        print(f"Total de Clientes Atendidos: {total_clientes}")
+        print("Total de Vendas de Produtos Quimioterápicos:", end="")
+        print(total_vendas_quimioterapico)
+        print("Total de Vendas de Produtos Fitoterápicos:", end=" ")
+        print(total_vendas_fitoterapico)
+
     data_hora = property(get_data_hora)
     produtos = property(get_produtos, set_produtos)
     cliente = property(get_cliente, set_cliente)
