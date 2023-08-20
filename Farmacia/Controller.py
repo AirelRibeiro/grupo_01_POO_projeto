@@ -97,7 +97,8 @@ class Controller:
         principal_composto = input(
             "Digite o principal composto do medicamento: "
         )
-        descricao = input("Digite uma descrição para o medicamento: ")
+
+        laboratorio = self.__cadastrar_laboratorio()
 
         for index, lab in enumerate(
             self.__laboratorio_classe.laboratorios_cadastrados
