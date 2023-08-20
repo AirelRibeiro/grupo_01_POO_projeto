@@ -59,6 +59,36 @@ class Controller:
         cliente = self.__cliente_classe(cpf, nome, f"{dia}/{mes}/{ano}")
         print(f"Cliente {cliente.nome} foi cadastrado com sucesso!")
 
+    def __cadastrar_laboratorio(self):
+        """
+        Método privado que realiza o cadastro de um novo laboratório,
+            se ele não existir.
+            Se ele já existir, retorna o laboratório encontrado.
+        """
+        nome = input("\nDigite o nome do laboratório: ")
+
+        for (
+            laboratorio_existente
+        ) in self.__laboratorio_classe.laboratorios_cadastrados:
+            if laboratorio_existente.nome == nome:
+                print(f"\nO laboratório {nome} está cadastrado.")
+                return laboratorio_existente
+        print(
+            "\nLaboratório não cadastrado, forneça as informações de cadastro:"
+        )
+        endereco = input("\nDigite o endereço do laboratório: ")
+        telefone = input("\nDigite o telefone do laboratório: ")
+        cidade = input("\nDigite a cidade do laboratório: ")
+        estado = input("\nDigite o estado do laboratório: ")
+
+        laboratorio = self.__laboratorio_classe(
+            nome, endereco, telefone, cidade, estado
+        )
+        print(
+            f"\nLaboratório {laboratorio.nome} foi cadastrado com sucesso!\n"
+        )
+        return laboratorio
+
     def __cadastrar_medicamento(self):
         """
         Método privado que realiza o cadastro de um novo medicamento.
