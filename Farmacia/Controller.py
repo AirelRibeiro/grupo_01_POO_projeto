@@ -100,14 +100,7 @@ class Controller:
 
         laboratorio = self.__cadastrar_laboratorio()
 
-        for index, lab in enumerate(
-            self.__laboratorio_classe.laboratorios_cadastrados
-        ):
-            print(f"{index + 1}: {lab.nome}")
-        lab_index = int(input("Escolha o laboratório pelo número: "))
-        laboratorio = self.__laboratorio_classe.laboratorios_cadastrados[
-            lab_index - 1
-        ]
+        preco = float(input("\nDigite o preço desse medicamento: "))
 
         tipo = input(
             "Digite o tipo do medicamento (1 Quimioterápico, 2 Fitoterápico): "
