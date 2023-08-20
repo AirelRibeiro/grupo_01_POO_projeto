@@ -254,6 +254,9 @@ class Controller:
 
         print(medicamentos_encontrados)
 
+    def __gera_relatorio_vendas(self):
+        self.__venda_classe.gerar_relatorio_vendas()
+
     def main(self):
         while True:
             print("\nMenu:\n")
