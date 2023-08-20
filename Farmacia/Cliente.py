@@ -23,7 +23,7 @@ class Cliente:
         :param data_nascimento: Data de nascimento do cliente
             no formato 'dd/mm/aaaa' (str).
         """
-        self.__cpf = cpf
+        self.cpf = cpf
         self.__nome = nome
         self.__data_nascimento = data_nascimento
         self.__salvar_cliente(self)
@@ -147,7 +147,7 @@ class Cliente:
         """
         return self.__cpf
 
-    def set_cpf(self, cpf: str) -> None:
+    def __set_cpf(self, cpf: str) -> None:
         """
         Define o CPF do cliente, se o CPF for válido.
 
@@ -189,6 +189,6 @@ class Cliente:
         """
         self.__data_nascimento = data_nascimento
 
-    cpf = property(get_cpf, set_cpf)
+    cpf = property(get_cpf, __set_cpf)
     nome = property(get_nome, set_nome)
     data_nascimento = property(get_data_nascimento, set_data_nascimento)
