@@ -121,6 +121,24 @@ class Cliente:
         except ValueError:
             return False
 
+    @staticmethod
+    def valida_se_idoso(data):
+        """
+        Verifica se o cliente é idoso com base na data de nascimento.
+
+        :return: True se o cliente for idoso, False caso contrário.
+        """
+        data_atual = datetime.now()
+        ano_atual = data_atual.year
+
+        dia, mes, ano = map(int, data.split("/"))
+
+        idade = (
+            ano_atual - ano - ((data_atual.month, data_atual.day) < (mes, dia))
+        )
+
+        return idade > 65
+
     def get_cpf(self) -> str:
         """
         Obtém o CPF do cliente.
