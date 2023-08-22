@@ -110,12 +110,15 @@ class Controller:
         if not self.__cliente_classe.valida_data_nascimento(
             f"{dia}/{mes}/{ano}"
         ):
-            print("Data inválida ou cliente com idade insuficiente.", end=" ")
-            print("Por favor verifique os dados e tente novamente.")
+            print(
+                "\nData inválida ou cliente com idade insuficiente.", end=" "
+            )
+            print("Por favor verifique os dados e tente novamente.\n")
             return
 
         cliente = self.__cliente_classe(cpf, nome, f"{dia}/{mes}/{ano}")
-        print(f"Cliente {cliente.nome} foi cadastrado com sucesso!")
+        print(f"\nCliente {cliente.nome} foi cadastrado com sucesso!\n")
+        return cliente
 
     def __cadastrar_laboratorio(self):
         """
@@ -222,7 +225,7 @@ class Controller:
         found = False
         for venda in self.__venda_classe.vendas:
             if venda.cliente.cpf == cpf:
-                print("\nCompra realizada em: ", end="")
+                print("\nCompra realizada em:", end=" ")
                 print({venda.data_hora.strftime("%Y-%m-%d %H:%M:%S")})
                 print("\nProdutos:")
                 for produto in venda.produtos:
@@ -240,13 +243,13 @@ class Controller:
                 if self.__cliente_classe.valida_se_idoso(
                     cliente.data_nascimento
                 ):
-                    print("\nCliente tem direito a 15% de desconto.")
+                    print("\nCliente tem direito a 15% de desconto.\n")
                 else:
-                    print("\nCliente não tem direito a desconto.")
+                    print("\nCliente não tem direito a desconto.\n")
                 found = True
                 break
         if not found:
-            print(f"\nO CPF {cpf} não está cadastrado.")
+            print(f"\nO CPF {cpf} não está cadastrado.\n")
 
     def __listar_medicamentos(self):
         """
@@ -277,7 +280,7 @@ class Controller:
         elif opcao == "3":
             print(self.__fitoterapico_classe.medicamentos)
         else:
-            print("\nOpção inválida. Por favor, tente novamente.")
+            print("\nOpção inválida. Por favor, tente novamente.\n")
 
     def __consultar_medicamento(self):
         """
@@ -292,10 +295,12 @@ class Controller:
 
         while tipo != "1" and tipo != "2":
             tipo = input(
-                "Digite um tipo válido. 1 Quimioterápico e 2 Fitoterápico: "
+                "\nDigite um tipo válido. 1 Quimioterápico e 2 Fitoterápico: "
             )
 
-        termo_busca = input("Digite o nome, fabricante ou descrição parcial: ")
+        termo_busca = input(
+            "\nDigite o nome, fabricante ou descrição parcial: "
+        )
 
         medicamentos_encontrados = []
 
@@ -344,7 +349,8 @@ class Controller:
     def main(self):
         count = 0
         while True:
-            print("\nMenu:\n")
+            print("\n--------------Menu--------------\n")
+            print("0. Realizar uma venda")
             print("1. Cadastrar cliente")
             print("2. Cadastrar medicamento")
             print("3. Cadastrar laboratório")
@@ -354,12 +360,14 @@ class Controller:
             print("7. Consultar idade para desconto")
             print("8. Listar medicamentos")
             print("9. Consultar medicamento")
-            print("0. Sair")
-            opcao = input("Escolha uma opção: ")
+            print("\nDigite 'sair' para encerrar.")
+            opcao = input("\n\nEscolha uma opção: ")
 
-            if opcao == "0":
+            if opcao.lower() == "sair":
                 self.__gera_relatorio_vendas()
                 break
+            elif opcao == "0":
+                self.__realizar_venda()
             elif opcao == "1":
                 self.__cadastrar_cliente()
             elif opcao == "2":
@@ -386,5 +394,7 @@ class Controller:
                     print("\nVocê precisa selecionar uma opção válida.\n")
 
                 else:
-                    print("\nSistema encerrado. Muitas interações inválidas!")
+                    print(
+                        "\nSistema encerrado. Muitas interações inválidas!\n"
+                    )
                     break
