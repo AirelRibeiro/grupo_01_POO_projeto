@@ -28,11 +28,11 @@ class Medicamento:
 
     def __repr__(self) -> str:
         return (
-            f"{self.nome}\n"
+            f"\n\n{self.nome}\n"
             f"Composto: {self.composto}\n"
-            f"Laboratorio: {self.laboratorio}\n"
+            f"Laboratorio: {self.laboratorio.nome}\n"
             f"Descrição: {self.descricao}\n"
-            f"Preço: {self.preco}"
+            f"Preço: {self.preco}\n"
         )
 
     def get_nome(self):
