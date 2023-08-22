@@ -24,7 +24,10 @@ class Venda:
         self.__data_hora = datetime.datetime.now()
         self.__produtos: list = produtos
         self.__cliente = cliente
-        self.__valor_total = self.calcular_valor_total()
+        (
+            self.__valor_total,
+            self.__houve_desconto,
+        ) = self.__calcular_valor_total()
         self.__salvar_venda(self)
 
     @classmethod
