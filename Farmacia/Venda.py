@@ -77,7 +77,19 @@ class Venda:
 
         :return: Valor total da venda (float).
         """
-        total = 0
+
+    def calcular_desconto(self, valor_total):
+        desconto_idoso = 0
+        desconto_valor = 0
+
+        if self.__cliente.valida_se_idoso():
+            desconto_idoso = 0.2
+        if valor_total > 150.0:
+            desconto_valor = 0.1
+        if max(desconto_idoso, desconto_valor) > 0:
+            self.__desconto = max(desconto_idoso, desconto_valor)
+        return max(desconto_idoso, desconto_valor)
+
         for produto in self.__produtos:
             total += produto.preco
         return total
