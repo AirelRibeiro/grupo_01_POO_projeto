@@ -55,14 +55,6 @@ class Venda:
         """
         return self.__produtos
 
-    def set_produtos(self, produtos: list):
-        """
-        Define a lista de produtos da venda.
-
-        :param produtos: Nova lista de produtos da venda (list).
-        """
-        self.__produtos = produtos
-
     def get_cliente(self):
         """
         Obtém o cliente associado à venda.
@@ -70,14 +62,6 @@ class Venda:
         :return: Cliente associado à venda.
         """
         return self.__cliente
-
-    def set_cliente(self, cliente):
-        """
-        Define o cliente associado à venda.
-
-        :param cliente: Novo cliente associado à venda.
-        """
-        self.__cliente = cliente
 
     def get_valor_total(self) -> float:
         """
