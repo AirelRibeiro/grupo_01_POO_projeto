@@ -1,4 +1,5 @@
 from Farmacia import *
+import data
 
 controller = Controller(
     Cliente,
