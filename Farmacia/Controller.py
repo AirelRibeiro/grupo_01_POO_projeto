@@ -226,7 +226,7 @@ class Controller:
                 print({venda.data_hora.strftime("%Y-%m-%d %H:%M:%S")})
                 print("\nProdutos:")
                 for produto in venda.produtos:
-                    print(f"{produto['nome']}, Preço: {produto['preco']}")
+                    print(f"\nProduto: {produto.nome}, Preço: {produto.preco}")
                 print(f"\nValor Total: {venda.valor_total:.2f}")
                 found = True
         if not found:
