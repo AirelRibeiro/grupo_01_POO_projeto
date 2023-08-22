@@ -121,8 +121,7 @@ class Cliente:
         except ValueError:
             return False
 
-    @staticmethod
-    def valida_se_idoso(data):
+    def valida_se_idoso(self):
         """
         Verifica se o cliente é idoso com base na data de nascimento.
 
@@ -131,7 +130,7 @@ class Cliente:
         data_atual = datetime.now()
         ano_atual = data_atual.year
 
-        dia, mes, ano = map(int, data.split("/"))
+        dia, mes, ano = map(int, self.data_nascimento.split("/"))
 
         idade = (
             ano_atual - ano - ((data_atual.month, data_atual.day) < (mes, dia))
