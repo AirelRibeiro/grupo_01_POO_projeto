@@ -71,7 +71,17 @@ class Venda:
         """
         return self.__valor_total
 
-    def calcular_valor_total(self) -> float:
+    def get_houve_desconto(self) -> bool:
+        """
+        Obetém o indicador de desconto para a venda.
+
+        :return: Valor total da venda (float).
+        """
+        return self.__houve_desconto
+
+    def get_desconto(self) -> float:
+        return self.__desconto
+
         """
         Calcula e retorna o valor total da venda.
 
