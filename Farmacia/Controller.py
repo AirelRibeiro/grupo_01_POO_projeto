@@ -321,7 +321,25 @@ class Controller:
         print(medicamentos_encontrados)
 
     def __gera_relatorio_vendas(self):
-        self.__venda_classe.gerar_relatorio_vendas()
+
+        (
+            total_vendas,
+            total_receita,
+            produto_mais_vendido,
+            total_clientes,
+            total_vendas_quimioterapico,
+            total_vendas_fitoterapico,
+        ) = self.__venda_classe.gerar_relatorio_vendas()
+
+        print("\n\nRelatório de Vendas\n\n")
+        print(f"\Total de Vendas: {total_vendas}\n")
+        print(f"Total de Receita: R${total_receita:.2f}\n")
+        print(f"Produto Mais Vendido: {produto_mais_vendido}\n")
+        print(f"Total de Clientes Atendidos: {total_clientes}\n")
+        print("Total de Vendas de Produtos Quimioterápicos:", end=" ")
+        print(total_vendas_quimioterapico)
+        print("\nTotal de Vendas de Produtos Fitoterápicos:", end=" ")
+        print(total_vendas_fitoterapico)
 
     def main(self):
         count = 0
