@@ -30,6 +30,61 @@ class Controller:
         self.__fitoterapico_classe = fitoterapico
         self.__venda_classe = venda
 
+    def __realizar_venda(self):
+        """
+        Método privado que realiza uma venda.
+        """
+        cpf = input("Digite o CPF do cliente (sem pontuação): ")
+
+        cliente = None
+        for cliente_existente in self.__cliente_classe.clientes_cadastrados:
+            if cliente_existente.cpf == cpf:
+                cliente = cliente_existente
+                break
+
+        if cliente is None:
+            print("Cliente não cadastrado. Realize o cadastro agora!")
+            cliente = self.__cadastrar_cliente()
+
+        produtos = []
+        while True:
+            nome_produto = input(
+                "Digite o nome do produto ou 'fim' para encerrar: "
+            )
+            if nome_produto.lower() == "fim":
+                break
+
+            produto_encontrado = False
+            for produto in (
+                self.__quimioterapico_classe.medicamentos
+                + self.__fitoterapico_classe.medicamentos
+            ):
+                if produto.nome.lower() == nome_produto.lower():
+                    if (
+                        isinstance(produto, self.__quimioterapico_classe)
+                        and produto.necessita_receita is True
+                    ):
+                        print("Medicamento controlado!\n")
+                        print(f"Verificar a receita para {produto.nome}\n")
+                    produtos.append(produto)
+                    produto_encontrado = True
+                    break
+
+            if not produto_encontrado:
+                print(f"\nProduto '{nome_produto}' não encontrado.\n")
+
+        if not produtos:
+            print("\nNenhum produto adicionado à lista de compra.\n")
+            return
+
+        venda = self.__venda_classe(produtos, cliente)
+        print("\nVenda realizada com sucesso!\n")
+        print(list(produto.nome for produto in venda.produtos))
+
+        if venda.houve_desconto is True:
+            print(f"\nDesconto de {venda.desconto}.\n")
+        print(f"\nValor total: {venda.valor_total}\n")
+
     def __cadastrar_cliente(self):
         """
         Método privado que realiza o cadastro de um novo cliente.
