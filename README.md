@@ -42,7 +42,7 @@ python3 main.py
 
 ### Diagrama de classes:
 
-![Diagrama de classe](diagrama_classes_poo_1011.jpg)
+![Diagrama de classe]()
 
 ### O projeto está organizado da seguinte maneira:
 
