@@ -212,8 +212,8 @@ class Controller:
                 print(cliente.data_nascimento)
                 found = True
                 break
-            if not found:
-                print(f"\nO CPF {cpf} não está cadastrado.")
+        if not found:
+            print(f"\nO CPF {cpf} não está cadastrado.")
 
     def __consultar_historico_compras(self):
         cpf = input(
