@@ -82,6 +82,7 @@ class Venda:
     def get_desconto(self) -> float:
         return self.__desconto
 
+    def __calcular_valor_total(self) -> float:
         """
         Calcula e retorna o valor total da venda.
 
@@ -104,23 +105,28 @@ class Venda:
             self.__desconto = max(desconto_idoso, desconto_valor)
         return max(desconto_idoso, desconto_valor)
 
-        for produto in self.__produtos:
-            total += produto.preco
-        return total
-
     @classmethod
     def gerar_relatorio_vendas(cls):
         """
-        Gera um relatório de vendas contendo as estatísticas solicitadas.
+        Gera um relatório de vendas contendo as estatísticas de
+            um ciclo de venda:
+        total de vendas (int),
+        total de receita (float),
+        produto mais vendido (str),
+        total de clientes atendidos (int),
+        total de vendas de quimioterápicos(int),
+        total de venda de fitoterápicos (int),
+
+        :return: Todos as informações geradas (tuple)
         """
         total_vendas = len(cls.vendas)
-        total_receita = sum(venda.obter_valor_total() for venda in cls.vendas)
+        total_receita = sum(venda.valor_total for venda in cls.vendas)
 
         produto_mais_vendido = None
         max_qtd_vendida = 0
         produto_qtd_vendida = {}
         for venda in cls.vendas:
-            for produto in venda.obter_produtos():
+            for produto in venda.produtos:
                 nome_produto = produto.nome
                 if nome_produto in produto_qtd_vendida:
                     produto_qtd_vendida[nome_produto] += 1
@@ -130,39 +136,36 @@ class Venda:
                     max_qtd_vendida = produto_qtd_vendida[nome_produto]
                     produto_mais_vendido = nome_produto
 
-        clientes_unicos = set(
-            venda.obter_cliente().nome for venda in cls.vendas
-        )
+        clientes_unicos = set(venda.cliente.nome for venda in cls.vendas)
         total_clientes = len(clientes_unicos)
 
-        total_vendas_quimioterapico = sum(
-            1
-            for venda in cls.vendas
-            if any(
-                produto.tipo == "Quimioterapico"
-                for produto in venda.obter_produtos()
-            )
-        )
-        total_vendas_fitoterapico = sum(
-            1
-            for venda in cls.vendas
-            if any(
-                produto.tipo == "Fitoterapico"
-                for produto in venda.obter_produtos()
-            )
-        )
+        total_vendas_quimioterapico = 0
+        total_vendas_fitoterapico = 0
+        for venda in cls.vendas:
+            for produto in venda.produtos:
+                if (
+                    str(type(produto))
+                    == "<class 'Farmacia.Medicamento.MedicamentoFitoterapico'>"
+                ):
+                    total_vendas_fitoterapico += 1
+                elif (
+                    str(type(produto))
+                    == "<class 'Farmacia.Medicamento.MedicamentoQuimioterapico'>"
+                ):
+                    total_vendas_quimioterapico += 1
 
-        print("Relatório de Vendas")
-        print(f"Total de Vendas: {total_vendas}")
-        print(f"Total de Receita: R${total_receita:.2f}")
-        print(f"Produto Mais Vendido: {produto_mais_vendido}")
-        print(f"Total de Clientes Atendidos: {total_clientes}")
-        print("Total de Vendas de Produtos Quimioterápicos:", end="")
-        print(total_vendas_quimioterapico)
-        print("Total de Vendas de Produtos Fitoterápicos:", end=" ")
-        print(total_vendas_fitoterapico)
+        return (
+            total_vendas,
+            total_receita,
+            produto_mais_vendido,
+            total_clientes,
+            total_vendas_quimioterapico,
+            total_vendas_fitoterapico,
+        )
 
     data_hora = property(get_data_hora)
-    produtos = property(get_produtos, set_produtos)
-    cliente = property(get_cliente, set_cliente)
+    produtos = property(get_produtos)
+    cliente = property(get_cliente)
     valor_total = property(get_valor_total)
+    houve_desconto = property(get_houve_desconto)
+    desconto = property(get_desconto)
