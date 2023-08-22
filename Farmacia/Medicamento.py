@@ -166,12 +166,8 @@ class MedicamentoQuimioterapico(Medicamento):
 
     def __repr__(self) -> str:
         return (
-            f"\n\n{self.nome}\n"
-            f"Composto: {self.composto}\n"
-            f"Laboratorio: {self.laboratorio}\n"
-            f"Descrição: {self.descricao}\n"
-            f"Preço: {self.preco}"
-            f"Necessita receita? {'Sim' if self.necessita_receita else 'Não'}"
+            super().__repr__()
+            + f"Necessita receita? {'Sim' if self.necessita_receita else 'Não'}"
         )
 
     def get_necessita_receita(self):
